@@ -43,7 +43,24 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if(!Auth::guest())
+                            <li class="dropdown" style="margin-left: 5%;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Requests <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('addRequest') }}">
+                                            Add Request
+                                        </a>
+                                        <a href="{{ route('listRequests') }}">
+                                            List Requests
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                         @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
