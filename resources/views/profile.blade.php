@@ -8,12 +8,8 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        @if(!Auth::user()->name)
-                            {{Auth::user()->name}}
-                        @else
-                            Teste
-                        @endif
-                    </h3>a
+                        {{Auth::user()->name}}
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -23,7 +19,10 @@
                         @else
                                     https://img.clipartfox.com/92c885a740b3c81c1cdf5e5e3752d86f_facebook-profile-picture-2017-facebook-profile-clipart_1290-1290.jpeg
                         @endif
-                        " class="img-circle img-responsive"> </div>
+                        " class="img-circle img-responsive">
+                            <br>
+                            <a href="{{route('edit', [Auth::user()->id])}}" class="btn btn-primary btn-sm" style="float: none;">Edit Profile</a>
+                        </div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
                                 <tbody>
@@ -37,25 +36,29 @@
                                 </tr>
 
                                 <tr>
-                                <tr>
-                                    <td>Home Address</td>
-                                    <td>Kathmandu,Nepal</td>
-                                </tr>
-                                <tr>
                                     <td>Email</td>
                                     <td><a href="mailto:{{Auth::user()->email}}">{{Auth::user()->email}}</a></td>
                                 </tr>
-                                <td>Phone Number</td>
-                                <td>{{Auth::user()->phone}}
-                                </td>
-
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>{{Auth::user()->phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Profile URL</td>
+                                    <td>{{Auth::user()->profile_url}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Prints</td>
+                                    <td>{{Auth::user()->print_counts}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Presentation</td>
+                                    <td>{{Auth::user()->presentation}}</td>
                                 </tr>
 
                                 </tbody>
                             </table>
 
-                            <a href="#" class="btn btn-primary">My Sales Performance</a>
-                            <a href="#" class="btn btn-primary">Team Sales Performance</a>
                         </div>
                     </div>
                 </div>
