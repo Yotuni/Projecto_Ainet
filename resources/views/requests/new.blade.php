@@ -55,16 +55,17 @@
                                     <div class="col-md-6">Ficheiro
                                     </div>
                                 </div>
+
                             </div>
 
-
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="col-md-6 col-md-offset-4" style="margin-right: 0%;">
+                                    <button type="submit" class="btn btn-primary" align="left">
                                         Confirm
                                     </button>
                                 </div>
                             </div>
+
                         </form>
 
 
