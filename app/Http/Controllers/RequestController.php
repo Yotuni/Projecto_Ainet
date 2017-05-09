@@ -8,9 +8,6 @@ class RequestController extends Controller
 {
     public function create(Request $request) {
         $pedido = new Request();
-
-        $pedido->name = $request['name'];
-
         $pedido->save();
 
         return redirect('home');
@@ -18,6 +15,6 @@ class RequestController extends Controller
 
     public function index()
     {
-        return view('printers.new');
+        return view('home');
     }
 }

@@ -14,7 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+//Route::get('/requests', 'RequestController@create')->name('addRequest');
+//
+//Route::get('/requests', 'RequestController@index')->name('listRequest');
+Route::resource('requests', 'RequestController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@profile')->name('home');
@@ -33,6 +36,4 @@ Route::get('/departments', 'DepartmentController@index');
 
 Route::post('/departments', 'DepartmentController@create');
 
-Route::get('/requests', 'RequestController@create')->name('addRequest');
 
-Route::get('/requests', 'RequestController@index')->name('listRequest');
