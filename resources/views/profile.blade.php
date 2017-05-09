@@ -28,7 +28,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Department:</td>
-                                    <td>{{Auth::user()->departament}}</td>
+                                    <td>{{DB::table('departaments')->where('id', Auth::user()->department_id)->value('name')}}</td>
                                 </tr>
                                 <tr>
                                     <td>Creation date:</td>

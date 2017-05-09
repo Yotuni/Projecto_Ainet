@@ -24,3 +24,15 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('{id}/edit', 'UserController@edit')->name('edit');
 
 Route::put('{id}/edit', 'UserController@update')->name('update');
+
+Route::get('/printers', 'PrinterController@index');
+
+Route::post('/printers', 'PrinterController@create');
+
+Route::get('/departments', 'DepartmentController@index');
+
+Route::post('/departments', 'DepartmentController@create');
+
+Route::get('/requests', 'RequestController@create')->name('addRequest');
+
+Route::get('/requests', 'RequestController@index')->name('listRequest');

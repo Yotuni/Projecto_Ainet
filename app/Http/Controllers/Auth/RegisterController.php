@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Department;
 
 class RegisterController extends Controller
 {
@@ -51,6 +52,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'department_id' => 'required',
         ]);
     }
 
@@ -66,6 +68,18 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'admin' => 0,
+            'blocked' => 0,
+            'print_evals' => 0,
+            'print_counts' => 0,
+            'department_id' => $data['department_id'],
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        $departments = Department::all();
+
+        return view('auth.register', compact('departments'));
     }
 }

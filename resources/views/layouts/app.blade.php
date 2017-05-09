@@ -49,7 +49,7 @@
                                     Requests <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
+                                {{--<ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('addRequest') }}">
                                             Add Request
@@ -58,7 +58,7 @@
                                             List Requests
                                         </a>
                                     </li>
-                                </ul>
+                                </ul>--}}
                             </li>
                          @endif
                     </ul>

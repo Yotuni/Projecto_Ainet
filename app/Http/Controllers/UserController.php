@@ -48,28 +48,28 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User deleted successfully!!');
     }
 
-    public function store(CreateUserPostRequest $request)
+/*    public function store(CreateUserPostRequest $request)
     {
         $user = new User();
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('users.index')->with('success', 'User added successfully!!');
-    }
+    }*/
 
-    // public function store(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'name' => 'required|regex:/^[a-zA-Z ]+$/',
-    //         'email' => 'required|unique:users|email',
-    //         'type' => 'required|between:0,2',
-    //         'password' => 'required|min:8|confirmed'
-    //         ]);
-    //     $user = new User();
-    //     $user->fill($request->all());
-    //     $user->password = Hash::make($request->password);
-    //     $user->save();
+     public function store(Request $request)
+     {
+         $this->validate($request, [
+             'name' => 'required|regex:/^[a-zA-Z ]+$/',
+             'email' => 'required|unique:users|email',
+             'type' => 'required|between:0,2',
+             'password' => 'required|min:8|confirmed'
+             ]);
+         $user = new User();
+         $user->fill($request->all());
+         $user->password = Hash::make($request->password);
+         $user->save();
 
-    //     return redirect()->route('users.index')->with('success', 'User added successfully!!');
-    // }
+         return redirect()->route('users.index')->with('success', 'User added successfully!!');
+     }
 }
