@@ -60,7 +60,7 @@
                                 <label for="phone" class="col-md-4 control-label">Phone Number</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control" name="phone" value="{{old('phone', $user->phone)}}" required>
+                                    <input id="phone" type="text" class="form-control" name="phone" value="{{old('phone', $user->phone)}}" >
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
@@ -74,7 +74,7 @@
                                 <label for="profile_url" class="col-md-4 control-label">Profile Url</label>
 
                                 <div class="col-md-6">
-                                    <input id="profile_url" type="text" class="form-control" name="profile_url" value="{{old('profile_url', $user->profile_url)}}" required>
+                                    <input id="profile_url" type="text" class="form-control" name="profile_url" value="{{old('profile_url', $user->profile_url)}}" >
 
                                     @if ($errors->has('profile_url'))
                                         <span class="help-block">
@@ -88,7 +88,7 @@
                                 <label for="profile_photo" class="col-md-4 control-label">Profile Photo</label>
 
                                 <div class="col-md-6">
-                                    <input id="profile_photo" type="text" class="form-control" name="profile_photo" value="{{old('profile_photo', $user->profile_photo)}}" required>
+                                    <input id="profile_photo" type="text" class="form-control" name="profile_photo" value="{{old('profile_photo', $user->profile_photo)}}" >
 
                                     @if ($errors->has('profile_photo'))
                                         <span class="help-block">

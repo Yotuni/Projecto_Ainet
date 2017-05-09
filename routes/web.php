@@ -14,9 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-//Route::get('/requests', 'RequestController@create')->name('addRequest');
-//
-//Route::get('/requests', 'RequestController@index')->name('listRequest');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@profile')->name('home');
@@ -36,9 +34,4 @@ Route::resource('requests', 'RequestController');
 Route::resource('printers', 'PrinterController');
 
 Route::resource('departments', 'DepartmentController');
-
-//Route::get('/departments', 'DepartmentController@index');
-//
-//Route::post('/departments', 'DepartmentController@create');
-
 
