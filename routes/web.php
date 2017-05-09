@@ -17,7 +17,6 @@ Route::get('/', function () {
 //Route::get('/requests', 'RequestController@create')->name('addRequest');
 //
 //Route::get('/requests', 'RequestController@index')->name('listRequest');
-Route::resource('requests', 'RequestController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@profile')->name('home');
@@ -32,8 +31,14 @@ Route::get('/printers', 'PrinterController@index');
 
 Route::post('/printers', 'PrinterController@create');
 
-Route::get('/departments', 'DepartmentController@index');
+Route::resource('requests', 'RequestController');
 
-Route::post('/departments', 'DepartmentController@create');
+Route::resource('printers', 'PrinterController');
+
+Route::resource('departments', 'DepartmentController');
+
+//Route::get('/departments', 'DepartmentController@index');
+//
+//Route::post('/departments', 'DepartmentController@create');
 
 

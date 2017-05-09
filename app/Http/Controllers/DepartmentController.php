@@ -13,12 +13,19 @@ class DepartmentController extends Controller
     }
 
     public function create(Request $request) {
+        $department = new Department;
+        return view('departments.new' , compact('department'));
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|regex:/^[a-zA-Z ]+$/',
+        ]);
         $department = new Department();
-
-        $department->name = $request['name'];
-
+        $department->fill($request->all());
         $department->save();
 
-        return redirect('home');
+        return redirect()->route('profile')->with('success', 'User added successfully!!');
     }
 }
