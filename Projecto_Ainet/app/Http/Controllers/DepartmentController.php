@@ -13,7 +13,6 @@ class DepartmentController extends Controller
     //Lista todos os departamentos
     public function index() {
         $departments = department::all();
-
         return view('departments.index', compact('departments'));
     }
 
