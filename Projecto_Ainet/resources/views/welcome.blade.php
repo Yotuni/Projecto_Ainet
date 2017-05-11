@@ -27,6 +27,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="text"><h2>Total de Impressões por departamento</h2>
+
                                         </div>
                                     </div>
                                 </div>
