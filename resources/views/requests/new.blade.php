@@ -60,8 +60,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4" style="margin-right: 0%;">
+                                    <br>
                                     <button type="submit" class="btn btn-primary" align="left">
-                                        Confirm
+                                        Confirms
                                     </button>
                                 </div>
                             </div>

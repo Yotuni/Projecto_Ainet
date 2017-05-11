@@ -43,6 +43,10 @@ class PrinterController extends Controller
         }
     }
 
+    public function getPrinterNames(){
+        return DB::table('printers')->value('name')->get();
+    }
+
     //Mostra determinada impressora
     public function show($id) {
         $printer = printer::find($id);

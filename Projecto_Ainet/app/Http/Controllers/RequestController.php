@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\PrintRequest;
+use App\Request;
+use App\Printer;
 
 class RequestController extends Controller
 {
     public function create(Request $request) {
-        $pedido = new PrintRequest();
-        return view('requests.new', compact('pedido'));
+        $pedido = new Request();
+        $printers = Printer::all();
+        return view('requests.new', compact('pedido', 'printers'));
     }
 
     public function store(Request $request)

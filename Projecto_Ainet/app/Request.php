@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PrintRequest extends Model
+class Request extends Model
 {
     /**
      * The attributes that are mass assignable.
