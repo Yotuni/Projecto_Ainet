@@ -42,9 +42,73 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                    @if(!Auth::guest())
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" style="margin-left: 5%;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Requests <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('requests.create') }}">
+                                            Add Request
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('requests.index') }}">
+                                            List Requests
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
+                    @if(!Auth::guest())
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" style="margin-left: 5%;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Departments <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('departments.create') }}">
+                                            Add Department
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('departments.index') }}">
+                                            List Department
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
+
+                    @if(!Auth::guest())
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" style="margin-left: 5%;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Printers <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('printers.create') }}">
+                                            Add Printer
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('printers.index') }}">
+                                            List Printers
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -60,6 +124,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ route('profile') }}">
+                                            Profile
+                                        </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
