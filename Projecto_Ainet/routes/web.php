@@ -17,21 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@profile')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('printers', 'PrinterController');
+
+Route::resource('departments', 'DepartmentController');
+
+Route::resource('requests', 'RequestController');
 
 Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::get('{id}/edit', 'UserController@edit')->name('edit');
 
 Route::put('{id}/edit', 'UserController@update')->name('update');
-
-Route::get('/printers', 'PrinterController@index');
-
-Route::post('/printers', 'PrinterController@create');
-
-Route::resource('requests', 'RequestController');
-
-Route::resource('printers', 'PrinterController');
-
-Route::resource('departments', 'DepartmentController');
-

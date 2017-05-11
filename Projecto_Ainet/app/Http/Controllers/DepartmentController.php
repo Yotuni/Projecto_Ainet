@@ -3,29 +3,88 @@
 namespace App\Http\Controllers;
 
 use App\Department;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class DepartmentController extends Controller
 {
-    public function index()
-    {
-        return view('departments.new');
+    //Lista todos os departamentos
+    public function index() {
+        $departments = department::all();
+
+        return view('departments.index', compact('departments'));
     }
 
-    public function create(Request $request) {
-        $department = new Department;
-        return view('departments.new' , compact('department'));
+    //Apresenta o form para criar novo departamento
+    public function create() {
+        return view('departments.create');
     }
 
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|regex:/^[a-zA-Z ]+$/',
-        ]);
-        $department = new Department();
-        $department->fill($request->all());
-        $department->save();
+    //Guarda novo departamento
+    public function store() {
+        $rules = array(
+            'name' => 'required|unique:departments',
+        );
+        $validator = Validator::make(Input::all(), $rules);
 
-        return redirect()->route('profile')->with('success', 'User added successfully!!');
+        if ($validator->fails()) {
+            return Redirect::to('departments/create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $department = new department;
+            $department->name = Input::get('name');
+            $department->save();
+
+            Session::flash('message', 'Department created!');
+            return Redirect::to('departments');
+        }
+    }
+
+    //Mostra determinado departamento
+    public function show($id) {
+        $department = department::find($id);
+
+        return view('departments.show', compact('department'));
+    }
+
+    //Mostra form para editar determinada departamento
+    public function edit($id) {
+        $department = department::find($id);
+
+        return view('departments.edit', compact('department'));
+    }
+
+    //Atualiza a informação de determinado departamento
+    public function update($id) {
+        $rules = array(
+            'name' => 'required|unique:departments',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('departments/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $department = department::find($id);
+            $department->name = Input::get('name');
+            $department->save();
+
+            Session::flash('message', 'Department updated!');
+            return Redirect::to('departments');
+        }
+    }
+
+    //Remove determinado departamento
+    public function destroy($id) {
+        $department = department::find($id);
+        $department->delete();
+
+        Session::flash('message', 'Department deleted!');
+        return Redirect::to('departments');
     }
 }
