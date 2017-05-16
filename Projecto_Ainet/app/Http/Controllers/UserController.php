@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Auth;
+use Image;
+
+
+
 use App\User;
 class UserController extends Controller
 {
@@ -29,6 +35,11 @@ class UserController extends Controller
         return view('edit' , compact('user'));
     }
 
+    public function profile()
+    {
+        return view('profile');
+    }
+
     public function update(Request $request, $user_id)
     {
         $user = User::findOrFail($user_id);
@@ -36,9 +47,31 @@ class UserController extends Controller
             'name' => 'required|regex:/^[a-zA-Z ]+$/',
             'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
+        if ($request->hasFile('photo')) {
+            //Retrieve photo from request
+            $photo = $request->file('photo');
+            //Make image
+            $image = Image::make($photo)->resize(200, 300);
+            //Image's name will be its name's hash
+            $filename = $request->photo->hashName();
+            $path = 'profiles';
+            //Storing image
+            Storage::disk('public')->put($path . '/' . $filename, $image->stream());
+            //Get user
+            $user = Auth::user();
+            //Delete previous image
+            Storage::disk('public')->delete($path . '/' . $user->profile_photo);
+            //Stores the photo's hashname in DB
+            $user->profile_photo = $filename;
+        }
         $user->fill($request->except('password'));
         $user->save();
         return redirect()->route('profile')->with('success', 'User updated successfully!!');
+    }
+
+    public static function getProfilePhoto($filename = true){
+        $path = "https://img.clipartfox.com/92c885a740b3c81c1cdf5e5e3752d86f_facebook-profile-picture-2017-facebook-profile-clipart_1290-1290.jpeg";
+        return $path;
     }
 
     public function destroy($user_id)

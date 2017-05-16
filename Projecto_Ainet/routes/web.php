@@ -23,7 +23,7 @@ Route::resource('departments', 'DepartmentController');
 
 Route::resource('requests', 'RequestController');
 
-Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/profile', 'UserController@profile')->name('profile');
 
 Route::get('{id}/edit', 'UserController@edit')->name('edit');
 

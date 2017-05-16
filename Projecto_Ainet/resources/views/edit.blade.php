@@ -10,20 +10,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Edit Profile</div>
                     <div class="panel-body">
-
-                        <form class="form-horizontal" role="form" method="POST" action="{{route('update',$user->id)}}">
+                        {!! Form::open(array('route' => array('update',$user->id), 'files'=>true)) !!}
                             {{ csrf_field() }}
                             {{method_field('PUT')}}
 
                             <div class="form-group">
                                 <div class="col-md-10">
-                                <img alt="User Pic" src="
-                                @if($user->profile_photo)
-                                    {{$user->profile_photo}}
-                                @else
-                                    https://img.clipartfox.com/92c885a740b3c81c1cdf5e5e3752d86f_facebook-profile-picture-2017-facebook-profile-clipart_1290-1290.jpeg
-                                @endif
-                                    " class="img-circle img-responsive" style="width: 25%; height: 25%; margin-left: auto;margin-right: auto;" >
+                                <img alt="User Pic" src="{{Storage::disk('public')->url('profiles/'.Auth::user()->profile_photo)}}" class="img-circle img-responsive" style="width: 25%; height: 25%; margin-left: auto;margin-right: auto;" >
+                                    <br>
                             </div>
                             </div>
                                 <br>
@@ -33,7 +27,7 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" value="{{old('name', $user->name)}}" required autofocus>
-
+                                    <br>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -47,7 +41,7 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" value="{{old('email', $user->email)}}" required>
-
+                                    <br>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -61,7 +55,7 @@
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text" class="form-control" name="phone" value="{{old('phone', $user->phone)}}" >
-
+                                    <br>
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -75,7 +69,7 @@
 
                                 <div class="col-md-6">
                                     <input id="profile_url" type="text" class="form-control" name="profile_url" value="{{old('profile_url', $user->profile_url)}}" >
-
+                                    <br>
                                     @if ($errors->has('profile_url'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('profile_url') }}</strong>
@@ -88,18 +82,13 @@
                                 <label for="profile_photo" class="col-md-4 control-label">Profile Photo</label>
 
                                 <div class="col-md-6">
-                                    <input id="profile_photo" type="text" class="form-control" name="profile_photo" value="{{old('profile_photo', $user->profile_photo)}}" >
-
-                                    @if ($errors->has('profile_photo'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('profile_photo') }}</strong>
-                                    </span>
-                                    @endif
+                                    {!! Form::file('photo') !!}
+                                    <br>
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
-                                <label for="presentation" class="col-lg-4 control-label">Presentation</label>
+                            <div class="form-group{{ $errors->has('presentation') ? ' has-error' : '' }}">
+                                <label for="presentation" class="col-md-4 control-label">Presentation</label>
 
                                 <div class="col-md-6">
                                     <textarea id="presentation" type="text" class="form-control" name="presentation">{{old('presentation', $user->presentation)}}</textarea>
@@ -110,15 +99,16 @@
                                     @endif
                                 </div>
                             </div>
+                        <div class ="col-md-12">
+                            <br>
+                        <a href="{{ URL::to('printers') }}" class="btn btn-default pull-right" style="margin: 5px;">Cancel</a>
 
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Save Changes
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        {{ Form::submit('Create', array('class' => 'btn btn-primary pull-right', 'style' => 'margin: 5px;')) }}
+
+                        {{ Form::close() }}
+                        </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

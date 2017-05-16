@@ -10,39 +10,46 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create Request</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{route('requests.store', $pedido->id)}}">
+                        {!! Form::open(array('route' => array('requests.store', $pedido->id), 'files'=>true)) !!}
                             {{ csrf_field() }}
 
-                            <div class="col-md-6" border="1">
-                                <div class="row">
+                            <div class="col-md-6" style="">
+                                <div class="row" style="padding: 5px;">
+                                    <br>
+                                    <div class="input-group">
+                                        {!! Form::file('print_file') !!}
+                                    </div>
+                                    <br>
+                                </div>
+
+                                <div class="row" style="padding: 5px;">
                                         Description:
                                     <textarea id="description" type="text" class="form-control" name="description">{{old('description', $pedido->description)}}</textarea>
+                                    <br>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="padding: 5px;">
                                         Due Date:
                                     <input id="due_date" type="date" name="due_date" class="form-control">
 
                                 </div>
-                                <br>
-                                <div class="row">
-                                    <div class="input-group">
-                                        <label class="input-group-btn">
-                                        <span class="btn btn-primary">
-                                        Add File&hellip; <input type="file" style="display: none;">
-                                        </span>
-                                        </label>
-                                    </div>
-                                </div>
 
-                                <div class="row">
+                                <div class="row" style="padding: 5px;">
                                     <br>
                                     Stapled:
                                     <div class="pull-right">
                                         <input id="stapled" name="stapled" type="checkbox"/>
-                                        <label for="someSwitchOptionPrimary" class="label-primary"></label>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding: 5px;">
+                                    <br>
+                                    Front/Back:
+                                    <div class="pull-right">
+                                        <input id="front_back" name="front_back" type="checkbox"/>
                                     </div>
                                 </div>
                             </div>
+                            <br>
 
                             <div class="col-md-6">
                                 <div class="row" style="padding: 5px;">
@@ -55,6 +62,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <br>
                                 </div>
                                 <div class="row" style="padding: 5px;">
                                     <div class="input-group">
@@ -65,6 +73,7 @@
                                                 <option value=1>Colored</option>
                                         </select>
                                     </div>
+                                    <br>
                                 </div>
                                 <div class="row" style="padding: 5px;">
                                     <div class="input-group">
@@ -75,37 +84,34 @@
                                             <option value=1>A4</option>
                                         </select>
                                     </div>
+                                    <br>
                                 </div>
                                 <div class="row" style="padding: 5px;">
                                     <div class="input-group">
                                         Tipo do papel:
                                         <select id="paper_type" class="form-control" name="paper_type">
-                                            <option disabled selected> -- Rascunho / Normal / Fotográfico -- </option>
-                                            <option value=0>Rascunho</option>
+                                            <option disabled selected> -- Draft / Normal / Photografic -- </option>
+                                            <option value=0>Draft</option>
                                             <option value=1>Normal</option>
-                                            <option value=2>Fotográfico</option>
+                                            <option value=2>Photografic</option>
                                         </select>
                                     </div>
+                                    <br>
                                 </div>
                                 <div class="row" style="padding: 5px;">
                                     <div class="input-group">
                                         Numero de cópias:
-                                        <input id="quantity" type="text" name="due_date" class="form-control">
+                                        <input id="quantity" type="text" name="quantity" class="form-control">
                                     </div>
                                 </div>
                                 <br>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4" style="margin-right: 0%;">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">
-                                        Confirms
-                                    </button>
-                                </div>
-                            </div>
 
-                        </form>
+                        {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
 
+                        <a href="{{ URL::to('printers') }}" class="btn btn-default">Cancel</a>
+
+                        {{ Form::close() }}
 
                     </div>
                 </div>

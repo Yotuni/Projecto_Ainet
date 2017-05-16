@@ -29,6 +29,11 @@ Route::get('/printers', 'PrinterController@index');
 
 Route::post('/printers', 'PrinterController@create');
 
+Route::get('/{filename}', [
+    'uses' => 'UserController@getProfilePhoto',
+    'as' => 'account.image'
+]);
+
 Route::resource('requests', 'RequestController');
 
 Route::resource('printers', 'PrinterController');

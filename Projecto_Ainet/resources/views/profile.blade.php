@@ -13,13 +13,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="
-                        @if(Auth::user()->profile_photo)
-                                    {{Auth::user()->profile_photo}}
-                        @else
-                                    https://img.clipartfox.com/92c885a740b3c81c1cdf5e5e3752d86f_facebook-profile-picture-2017-facebook-profile-clipart_1290-1290.jpeg
-                        @endif
-                        " class="img-circle img-responsive">
+                        <div class="col-md-3 col-lg-3 " align="center">
+                            <img alt="User Pic" src="{{Storage::disk('public')->url('profiles/'.Auth::user()->profile_photo)}}" class="img-circle img-responsive">
                             <br>
                             <a href="{{route('edit', [Auth::user()->id])}}" class="btn btn-primary btn-sm" style="float: none;">Edit Profile</a>
                         </div>
