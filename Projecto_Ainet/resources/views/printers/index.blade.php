@@ -25,15 +25,15 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($printers as $key => $value)
+        @foreach($printers as $printer)
             <tr>
-                <td>{{ $value->id }}</td>
-                <td>{{ $value->name }}</td>
+                <td>{{ $printer->id }}</td>
+                <td>{{ $printer->name }}</td>
                 <td>
                     <!--<a class="btn btn-small btn-success" href="{{-- URL::to('printers/' . $value->id) --}}">Show</a>-->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('printers/' . $value->id . '/edit') }}">Edit</a>
+                    <a class="btn btn-small btn-success" href="{{ URL::to('printers/' . $printer->id . '/edit') }}">Edit</a>
                     <!--<a class="btn btn-small btn-danger" href="{{-- URL::to('printers/' . $value->id . '/remove') --}}">Remove</a>-->
-                    {{ Form::open(array('url' => 'printers/' . $value->id, 'class' => 'pull-right')) }}
+                    {{ Form::open(array('url' => 'printers/' . $printer->id, 'class' => 'pull-right')) }}
                     {{ Form::hidden('_method', 'DELETE') }}
                     {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
                     {{ Form::close() }}

@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="row" style="padding: 5px;">
                                         Due Date:
-                                    <input id="due_date" type="date" name="due_date" class="form-control">
+                                    <input id="due_date" type="date" name="due_date" class="form-control" value="{{old('due_date' , $pedido->due_date)}}">
 
                                 </div>
 
@@ -37,7 +37,11 @@
                                     <br>
                                     Stapled:
                                     <div class="pull-right">
-                                        <input id="stapled" name="stapled" type="checkbox"/>
+                                        @if (Input::old('stapled') == "1" || $pedido->stapled == "1")
+                                            <input id="stapled" name="stapled" type="checkbox" value="1" checked/>
+                                        @else
+                                            <input id="stapled" name="stapled" type="checkbox" value="1"/>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -45,7 +49,11 @@
                                     <br>
                                     Front/Back:
                                     <div class="pull-right">
-                                        <input id="front_back" name="front_back" type="checkbox"/>
+                                        @if (Input::old('front_back') == "1" || $pedido->front_back == "1")
+                                            <input id="front_back" name="front_back" type="checkbox" value="1" checked/>
+                                        @else
+                                            <input id="front_back" name="front_back" type="checkbox" value="1"/>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +66,11 @@
                                         <select id="printer_id" class="form-control" name="printer_id">
                                             <option disabled selected> -- select a printer -- </option>
                                             @foreach ($printers as $printer)
-                                                <option value={{$printer->id}}>{{$printer->name}}</option>
+                                                @if (Input::old('printer_id') == $printer->id || $pedido->printer_id == $printer->id)
+                                                    <option value="{{ $printer->id }}" selected>{{ $printer->name }}</option>
+                                                @else
+                                                    <option value="{{ $printer->id }}">{{ $printer->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -69,8 +81,13 @@
                                         Cores:
                                         <select id="colored" class="form-control" name="colored">
                                             <option disabled selected> -- Monochromatic / Colored -- </option>
-                                                <option value=0>Monochromatic</option>
-                                                <option value=1>Colored</option>
+                                            @foreach ($color_types as $key => $val)
+                                                @if (Input::old('colored') == $key || $pedido->colored == $key)
+                                                    <option value="{{ $key }}" selected>{{ $val }}</option>
+                                                @else
+                                                    <option value="{{ $key }}">{{ $val }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
                                     <br>
@@ -80,8 +97,13 @@
                                         Tamanho do papel:
                                         <select id="paper_size" class="form-control" name="paper_size">
                                             <option disabled selected> -- A3 / A4 -- </option>
-                                            <option value=0>A3</option>
-                                            <option value=1>A4</option>
+                                            @foreach ($paper_sizes as $key => $val)
+                                                @if (Input::old('paper_size') == $key || $pedido->paper_size == $key)
+                                                    <option value="{{ $key }}" selected>{{ $val }}</option>
+                                                @else
+                                                    <option value="{{ $key }}">{{ $val }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
                                     <br>
@@ -91,9 +113,13 @@
                                         Tipo do papel:
                                         <select id="paper_type" class="form-control" name="paper_type">
                                             <option disabled selected> -- Draft / Normal / Photografic -- </option>
-                                            <option value=0>Draft</option>
-                                            <option value=1>Normal</option>
-                                            <option value=2>Photografic</option>
+                                            @foreach ($paper_types as $key => $val)
+                                                @if (Input::old('paper_type') == $key || $pedido->paper_type == $key)
+                                                    <option value="{{ $key }}" selected>{{ $val }}</option>
+                                                @else
+                                                    <option value="{{ $key }}">{{ $val }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
                                     <br>
@@ -101,7 +127,7 @@
                                 <div class="row" style="padding: 5px;">
                                     <div class="input-group">
                                         Numero de cópias:
-                                        <input id="quantity" type="text" name="quantity" class="form-control">
+                                        <input id="quantity" type="text" name="quantity" class="form-control" value="{{old('quantity', $pedido->quantity)}}">
                                     </div>
                                 </div>
                                 <br>

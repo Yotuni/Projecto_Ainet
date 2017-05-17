@@ -20,9 +20,9 @@ class PrintRequest extends Model
 
     public function getCoresString($cor){
         switch($cor){
-            case 0 :
-                return "Monochromatic";
             case 1 :
+                return "Monochromatic";
+            case 2 :
                 return "Colored";
             default: return null;
         }
@@ -30,9 +30,9 @@ class PrintRequest extends Model
 
     public function getTamanhoString($tamanho){
         switch($tamanho){
-            case 0 :
-                return "A3";
             case 1 :
+                return "A3";
+            case 2 :
                 return "A4";
             default: return null;
         }
@@ -40,11 +40,11 @@ class PrintRequest extends Model
 
     public function getTipoString($tipo){
         switch($tipo){
-            case 0 :
-                return "Draft";
             case 1 :
-                return "Normal";
+                return "Draft";
             case 2 :
+                return "Normal";
+            case 3 :
                 return "Photograpic";
             default: return null;
         }
