@@ -28,3 +28,5 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('{id}/edit', 'UserController@edit')->name('edit');
 
 Route::put('{id}/edit', 'UserController@update')->name('update');
+
+Route::get('/listusers', 'UserController@index')->name('listusers');

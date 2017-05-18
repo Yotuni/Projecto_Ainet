@@ -20,7 +20,8 @@
                                     <div class="row">
                                         <label class="text">
                                             <h2>Total de impressoes:
-                                                {{htmlspecialchars(DB::table('requests')->count())}}
+
+
                                             </h2>
                                         </label>
                                     </div>
@@ -36,6 +37,7 @@
                                     <div class="row">
 
                                         <div class="text"><h2>Impressões feitas hoje</h2>
+
                                         </div>
                                     </div>
                                     <div class="row">
