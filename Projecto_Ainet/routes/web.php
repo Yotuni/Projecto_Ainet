@@ -23,10 +23,10 @@ Route::resource('departments', 'DepartmentController');
 
 Route::resource('requests', 'RequestController');
 
-Route::get('/details/{id}', 'RequestController@detail')->name('detail');
-
-Route::get('/profile', 'UserController@profile')->name('profile');
+Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::get('{id}/edit', 'UserController@edit')->name('edit');
 
 Route::put('{id}/edit', 'UserController@update')->name('update');
+
+Route::get('/listusers', 'UserController@index')->name('listusers');
