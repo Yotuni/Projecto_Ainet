@@ -36,12 +36,12 @@ class RequestController extends Controller
         return $printer_name;
     }
 
-    public function searchRequests($requests = null){
-        if($requests == null){
-            $requests = PrintRequest::all();
+    public function searchRequests($pedidos = null){
+        if($pedidos == null){
+            $pedidos = PrintRequest::all();
         }
         $departments = Department::all();
-        return view('requests.search', compact('requests' , 'departments'));
+        return view('requests.search', compact('pedidos' , 'departments'));
     }
 
     public static function getOwnerName($user_id){
@@ -50,18 +50,51 @@ class RequestController extends Controller
 
     public function refineSearch(Request $request){
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'name' => 'nullable|string|max:255',
             'expression' => 'nullable|string',
             'due_date' => 'nullable|date',
             'department_id' => 'numeric',
             'paper_type' => 'numeric|between:-1,2',
             'status' => 'numeric|between:-1,1',
         ]);
-        $pedidos = [];
+        $pedidos = null;
         if($request->name) {
             $owner_id = DB::table('users')->where('name',$request->name)->value('id');
             $pedidos = DB::table('requests')->where('owner_id', $owner_id)->get();
         }
+        /*if($request->department_id) {
+            if($pedidos != null) {
+                $pedidos_ids = array_intersect($pedidos_ids, DB::table('requests')->join('users', 'requests.owner_id', '=' , 'users.id')
+                    ->join('departments', 'users.department_id', '=', 'departments.id')
+                    ->where('departments.id', $request->department_id)->value('id'));
+            } else {
+                $pedidos_ids = DB::table('requests')->join('users', 'requests.owner_id', '=' , 'users.id')
+                    ->join('departments', 'users.department_id', '=', 'departments.id')
+                    ->where('departments.id', $request->department_id)->value('id');
+            }
+        }
+        if($request->due_date) {
+            if($pedidos != null) {
+                $pedidos = array_intersect($pedidos, DB::table('requests')->where('due_date', $request->due_date)->get());
+            } else {
+                $pedidos = DB::table('requests')->where('due_date', $request->due_date)->get();
+            }
+        }
+        if($request->paper_type) {
+            $pedidos = DB::table('requests')->where('paper_type', $request->paper_type)->get();
+        }
+        if($request->status) {
+            $pedidos = DB::table('requests')->where('status', $request->status)->get();
+        }*/
+        if($request->expression) {
+            if($pedidos != null) {
+                $pedidos = array_intersect($pedidos, DB::table('requests')->where('description', 'like',  "%".$request->expression."%")->get());
+            } else {
+                $pedidos_ids = DB::table('requests')->where('description', 'like',  "%".$request->expression."%")->value('id');
+            }
+        }
+
+
         $departments = Department::all();
         return view('requests.search', compact('pedidos', 'departments'));
     }

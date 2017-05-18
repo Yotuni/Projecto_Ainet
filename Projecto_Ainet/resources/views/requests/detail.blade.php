@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <h5 style="word-wrap: break-word;">
-                                            {{$pedido->file}}
+                                            {{Storage::disk('local')->url('print_files/'.$pedido->file)}}
                                         </h5>
                                     </div>
                                 </div>
