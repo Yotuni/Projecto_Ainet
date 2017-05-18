@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class DepartmentController extends Controller
 {
@@ -19,6 +20,11 @@ class DepartmentController extends Controller
     //Apresenta o form para criar novo departamento
     public function create() {
         return view('departments.create');
+    }
+
+    public static function getDepartmentNameByUserId($user_id){
+        $department_id = DB::table('users')->where('id', $user_id)->value('department_id');
+        return DB::table('departments')->where('id', $department_id)->value('name');
     }
 
     //Guarda novo departamento

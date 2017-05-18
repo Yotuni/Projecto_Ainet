@@ -36,3 +36,6 @@ Route::get('/listusers', 'UserController@index')->name('listusers');
 Route::get('/userRequests', 'RequestController@userRequests')->name('userRequests');
 
 Route::get('/searchRequests', 'RequestController@searchRequests')->name('searchRequests');
+
+Route::post('/refineSearch', 'RequestController@refineSearch')->name('refineSearch');
+

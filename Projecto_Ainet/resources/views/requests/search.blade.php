@@ -10,8 +10,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Search Panel</div>
                     <div class="panel-body">
+                        {{ Form::open(array('route' => array('refineSearch'))) }}
+                        {{ csrf_field() }}
+
                         <div class="row">
-                            {{ Form::open(array('route' => array('requests.store'))) }}
                             <div class="col-md-3">
                                 <h5>
                                     Name:
@@ -49,7 +51,7 @@
                             </div>
                             <div class="col-md-9">
                                 <select id="department_id" class="form-control pull-right" name="department_id" style="width: 90%;">
-                                    <option selected> -- select an option -- </option>
+                                    <option value=-1 selected> -- select an option -- </option>
                                     @foreach ($departments as $department)
                                         <option value={{$department->id}}>{{$department->name}}</option>
                                     @endforeach
@@ -64,7 +66,7 @@
                             </div>
                             <div class="col-md-9">
                                 <select id="status" class="form-control pull-right" name="status" style="width: 90%;">
-                                    <option selected> -- select an option -- </option>
+                                    <option value=-1 selected> -- select an option -- </option>
                                     <option value=0>Pending</option>
                                     <option value=1>Completed</option>
                                 </select>
@@ -78,7 +80,7 @@
                             </div>
                             <div class="col-md-9">
                                 <select id="type" class="form-control pull-right" name="type" style="width: 90%;">
-                                    <option selected> -- select an option -- </option>
+                                    <option value=-1 selected> -- select an option -- </option>
                                     <option value=0>Draft</option>
                                     <option value=1>Normal</option>
                                     <option value=2>Photographic</option>
@@ -88,11 +90,11 @@
                         <div class="row">
                             {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
 
-                            {{ Form::close() }}
                         </div>
 
 
 
+                        {{ Form::close() }}
 
                     </div>
                 </div>
@@ -101,8 +103,24 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Requests</div>
                     <div class="panel-body">
-
-
+                        <div class="row">
+                            <div class="col-md-1">ID</div>
+                            <div class="col-md-1">User</div>
+                            <div class="col-md-3">Department</div>
+                            <div class="col-md-5">Description</div>
+                            <div class="col-md-1">Status</div>
+                            <div class="col-md-1">Type</div>
+                        </div>
+                        @foreach($pedidos as $pedido)
+                            <div class="row">
+                                <div class="col-md-1">{{$pedido->id}}</div>
+                                <div class="col-md-1">{{\App\Http\Controllers\RequestController::getOwnerName($pedido->owner_id)}}</div>
+                                <div class="col-md-3">{{\App\Http\Controllers\DepartmentController::getDepartmentNameByUserId($pedido->owner_id)}}</div>
+                                <div class="col-md-5">{{$pedido->description}}</div>
+                                <div class="col-md-1">{{$pedido->status}}</div>
+                                <div class="col-md-1">{{$pedido->paper_type}}</div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

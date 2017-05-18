@@ -14,8 +14,9 @@ use DB;
 class RequestController extends Controller
 {
     public function index(){
+        $title = null;
         $requests = PrintRequest::all();
-        return view('requests.index', compact('requests'));
+        return view('requests.index', compact('requests', 'title'));
     }
 
     public function userRequests(){
@@ -35,14 +36,34 @@ class RequestController extends Controller
         return $printer_name;
     }
 
-    public function searchRequests(){
-        $requests = PrintRequest::all();
+    public function searchRequests($requests = null){
+        if($requests == null){
+            $requests = PrintRequest::all();
+        }
         $departments = Department::all();
         return view('requests.search', compact('requests' , 'departments'));
     }
 
+    public static function getOwnerName($user_id){
+        return DB::table('users')->where('id', $user_id)->value('name');
+    }
+
     public function refineSearch(Request $request){
-        
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'expression' => 'nullable|string',
+            'due_date' => 'nullable|date',
+            'department_id' => 'numeric',
+            'paper_type' => 'numeric|between:-1,2',
+            'status' => 'numeric|between:-1,1',
+        ]);
+        $pedidos = [];
+        if($request->name) {
+            $owner_id = DB::table('users')->where('name',$request->name)->value('id');
+            $pedidos = DB::table('requests')->where('owner_id', $owner_id)->get();
+        }
+        $departments = Department::all();
+        return view('requests.search', compact('pedidos', 'departments'));
     }
 
     public static function getColoredStr($cor){
