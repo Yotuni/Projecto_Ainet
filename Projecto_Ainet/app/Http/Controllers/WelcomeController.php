@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\PrintRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class WelcomeController extends Controller
     public function profile($user_id = null)
     {
         $user = User::findOrFail($user_id);
-        return view('profile', compact('user'));
+        $departments = Department::all();
+        return view('profile', compact('user', 'departments'));
     }
 
     public function listUsers()

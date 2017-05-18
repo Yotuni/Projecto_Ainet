@@ -39,7 +39,14 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{ $users->links() }}
+                            <div>
+                                <div class="pull-left">
+                                    {{ $users->links() }}
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{{ route('welcome') }}" class="btn btn-default">Voltar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

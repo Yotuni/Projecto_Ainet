@@ -25,7 +25,12 @@
                                 <tbody>
                                 <tr>
                                     <td>Department:</td>
-                                    <td>{{ $user->department_id}}</td>
+                                    @foreach($departments as $department)
+                                        @if ($user->department_id == $department->id)
+                                            <td>{{ $department->name }}</td>
+                                        @endif
+                                    @endforeach
+
                                 </tr>
                                 @if (Auth::check() && Auth::user()->id == $user->id)
                                     <tr>
@@ -58,6 +63,14 @@
 
                                 </tbody>
                             </table>
+
+                            <div class="pull-right">
+                                @if (Auth::check() && Auth::user()->id == $user->id)
+                                    <a href="{{ route('home') }}" class="btn btn-default">Voltar</a>
+                                @else
+                                    <a href="{{ route('listusers') }}" class="btn btn-default">Voltar</a>
+                                @endif
+                            </div>
 
                         </div>
                     </div>
