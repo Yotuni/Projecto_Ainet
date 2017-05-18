@@ -19,10 +19,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::paginate(7);
-
-        return view('listUsers', compact('users'));
+        $users = User::all;
+        return view('users.index', compact('users'));
     }
+
 
     public function create()
     {
@@ -36,10 +36,7 @@ class UserController extends Controller
         return view('edit' , compact('user'));
     }
 
-    public function profile()
-    {
-        return view('profile');
-    }
+
 
     public function update(Request $request, $user_id)
     {
@@ -67,7 +64,7 @@ class UserController extends Controller
         }
         $user->fill($request->except('password'));
         $user->save();
-        return redirect()->route('profile')->with('success', 'User updated successfully!!');
+        return redirect()->route('profile', $user_id)->with('success', 'User updated successfully!!');
     }
 
     public static function getProfilePhoto($filename = true){

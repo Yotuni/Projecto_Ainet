@@ -23,7 +23,7 @@ Route::resource('departments', 'DepartmentController');
 
 Route::resource('requests', 'RequestController');
 
-Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/profile/{id}', 'WelcomeController@profile')->name('profile');
 
 Route::get('{id}/edit', 'UserController@edit')->name('edit');
 
@@ -31,11 +31,11 @@ Route::put('{id}/edit', 'UserController@update')->name('update');
 
 Route::get('/details/{id}', 'RequestController@detail')->name('detail');
 
-Route::get('/listusers', 'UserController@index')->name('listusers');
-
 Route::get('/userRequests', 'RequestController@userRequests')->name('userRequests');
 
 Route::get('/searchRequests', 'RequestController@searchRequests')->name('searchRequests');
 
 Route::post('/refineSearch', 'RequestController@refineSearch')->name('refineSearch');
+
+Route::get('/listusers', 'WelcomeController@listUsers')->name('listusers');
 

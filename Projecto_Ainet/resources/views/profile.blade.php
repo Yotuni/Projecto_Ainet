@@ -8,47 +8,52 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        {{Auth::user()->name}}
+                        {{$user->name}}
                     </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="User Pic" src="{{Storage::disk('public')->url('profiles/'.Auth::user()->profile_photo)}}" class="img-circle img-responsive">
-                            <br>
-                            <a href="{{route('edit', [Auth::user()->id])}}" class="btn btn-primary btn-sm" style="float: none;">Edit Profile</a>
+                            <img alt="User Pic" src="{{Storage::disk('public')->url('profiles/'.$user->profile_photo)}}" class="img-circle img-responsive">
+                            @if (Auth::check() && Auth::user()->id == $user->id)
+                                <br>
+                                <a href="{{route('edit', [$user->id])}}" class="btn btn-primary btn-sm" style="float: none;">Edit Profile</a>
+                            @endif
                         </div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
                                 <tbody>
                                 <tr>
                                     <td>Department:</td>
-                                    <td>{{DB::table('departments')->where('id', Auth::user()->department_id)->value('name')}}</td>
+                                    <td>{{ $user->department_id}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Creation date:</td>
-                                    <td>{{Auth::user()->created_at}}</td>
-                                </tr>
-
+                                @if (Auth::check() && Auth::user()->id == $user->id)
+                                    <tr>
+                                        <td>Creation date:</td>
+                                        <td>{{$user->created_at}}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td>Email</td>
-                                    <td><a href="mailto:{{Auth::user()->email}}">{{Auth::user()->email}}</a></td>
+                                    <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
                                 </tr>
                                 <tr>
                                     <td>Phone Number</td>
-                                    <td>{{Auth::user()->phone}}</td>
+                                    <td>{{$user->phone}}</td>
                                 </tr>
                                 <tr>
                                     <td>Profile URL</td>
-                                    <td>{{Auth::user()->profile_url}}</td>
+                                    <td>{{$user->profile_url}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Number of Prints</td>
-                                    <td>{{Auth::user()->print_counts}}</td>
-                                </tr>
+                                @if (Auth::check() && Auth::user()->id == $user->id)
+                                    <tr>
+                                        <td>Number of Prints</td>
+                                        <td>{{$user->print_counts}}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td>Presentation</td>
-                                    <td>{{Auth::user()->presentation}}</td>
+                                    <td>{{$user->presentation}}</td>
                                 </tr>
 
                                 </tbody>
@@ -57,5 +62,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 @endsection

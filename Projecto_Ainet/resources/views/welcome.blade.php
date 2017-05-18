@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="container">
+    <div class="container">
             <div class="row">
                 <div>
                     <div class="panel panel-default">
@@ -48,14 +48,21 @@
                                     </div>
                                     <div class="row">
                                         <div class="text"><h2>Satisfação dos nossos clientes</h2></div>
-                                        </div>
-                                    <div class="col-md-6"><h2>Contactos dos utilizadores da organização</h2></div>
-                                        </div>
+
+                                        <div class="col-md-6"><h2>Contactos dos utilizadores da organização</h2></div>
                                     </div>
                                 </div>
+                                <a href="{{route('listusers')}}" class="btn btn-primary btn-sm" style="float: none;">List Users</a>
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
-    @endsection
+
+
+    </div>
+@endsection

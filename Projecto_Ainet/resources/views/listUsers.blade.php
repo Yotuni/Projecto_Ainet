@@ -16,6 +16,7 @@
                                     <th>Nome</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Profile</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -30,6 +31,10 @@
                                             @endif
                                         </td>
                                         <td>{{$user->email}}</td>
+                                        <td>
+                                            <a href="{{route('profile', $user->id)}}" class="btn btn-primary btn-sm" style="float: none;">Profile</a>
+                                        </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -37,6 +42,7 @@
                             {{ $users->links() }}
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
