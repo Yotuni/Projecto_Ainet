@@ -40,7 +40,7 @@
                                 </h5>
                             </div>
                             <div class="col-md-9">
-                                <input id="date" type="date" class="form-control pull-right" name="date">
+                                <input id="due_date" type="date" class="form-control pull-right" name="due_date">
                             </div>
                         </div>
                         <div class="row">
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-9">
                                 <select id="department_id" class="form-control pull-right" name="department_id" style="width: 90%;">
-                                    <option value=-1 selected> -- select an option -- </option>
+                                    <option disabled selected> -- select an option -- </option>
                                     @foreach ($departments as $department)
                                         <option value={{$department->id}}>{{$department->name}}</option>
                                     @endforeach
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-md-9">
                                 <select id="status" class="form-control pull-right" name="status" style="width: 90%;">
-                                    <option value=-1 selected> -- select an option -- </option>
+                                    <option disabled selected> -- select an option -- </option>
                                     <option value=0>Pending</option>
                                     <option value=1>Completed</option>
                                 </select>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-md-9">
                                 <select id="type" class="form-control pull-right" name="type" style="width: 90%;">
-                                    <option value=-1 selected> -- select an option -- </option>
+                                    <option disabled selected> -- select an option -- </option>
                                     <option value=0>Draft</option>
                                     <option value=1>Normal</option>
                                     <option value=2>Photographic</option>
@@ -111,16 +111,18 @@
                             <div class="col-md-1">Status</div>
                             <div class="col-md-1">Type</div>
                         </div>
-                        @foreach($pedidos as $pedido)
-                            <div class="row">
-                                <div class="col-md-1">{{$pedido->id}}</div>
-                                <div class="col-md-1">{{\App\Http\Controllers\RequestController::getOwnerName($pedido->owner_id)}}</div>
-                                <div class="col-md-3">{{\App\Http\Controllers\DepartmentController::getDepartmentNameByUserId($pedido->owner_id)}}</div>
-                                <div class="col-md-5">{{$pedido->description}}</div>
-                                <div class="col-md-1">{{$pedido->status}}</div>
-                                <div class="col-md-1">{{$pedido->paper_type}}</div>
-                            </div>
-                        @endforeach
+                        @if($pedidos != null)
+                            @foreach($pedidos as $pedido)
+                                <div class="row">
+                                    <div class="col-md-1">{{$pedido->id}}</div>
+                                    <div class="col-md-1">{{\App\Http\Controllers\RequestController::getOwnerName($pedido->owner_id)}}</div>
+                                    <div class="col-md-3">{{\App\Http\Controllers\DepartmentController::getDepartmentNameByUserId($pedido->owner_id)}}</div>
+                                    <div class="col-md-5">{{$pedido->description}}</div>
+                                    <div class="col-md-1">{{$pedido->status}}</div>
+                                    <div class="col-md-1">{{$pedido->paper_type}}</div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

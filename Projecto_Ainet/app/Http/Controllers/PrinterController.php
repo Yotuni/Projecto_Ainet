@@ -50,7 +50,6 @@ class PrinterController extends Controller
     //Mostra determinada impressora
     public function show($id) {
         $printer = printer::find($id);
-
         return view('printers.show', compact('printer'));
     }
 
