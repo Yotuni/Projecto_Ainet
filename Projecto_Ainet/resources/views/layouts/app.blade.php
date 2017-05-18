@@ -60,6 +60,16 @@
                                             List Requests
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('userRequests') }}">
+                                            Your Requests
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('searchRequests') }}">
+                                            Search Requests
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

@@ -3,14 +3,13 @@
 @section('content')
 <div class="container">
 
-    <nav class="navbar navbar-inverse">
-        <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('requests') }}">View All Requests</a></li>
-            <li><a href="{{ URL::to('requests/create') }}">Create a Request</a>
-        </ul>
-    </nav>
-
-    <h1>Requests</h1>
+    <h1>
+        @if ($title)
+            {{$title}}
+        @else
+            Requests
+        @endif
+    </h1>
 
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>

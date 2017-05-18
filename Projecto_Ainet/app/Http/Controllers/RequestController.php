@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -17,10 +18,31 @@ class RequestController extends Controller
         return view('requests.index', compact('requests'));
     }
 
+    public function userRequests(){
+        $requests = DB::table('requests')->where('owner_id', Auth::user()->id)->get();
+        $title = Auth::user()->name . " Requests";
+        return view ('requests.index', compact('requests', 'title'));
+    }
+
     public function detail($request_id) {
         $pedido = PrintRequest::findOrFail($request_id);
         $owner_user = DB::table('users')->where('id', $pedido->owner_id)->first();
         return view('requests.detail', compact('pedido', 'owner_user'));
+    }
+
+    public static function getPrinterName($printer_id){
+        $printer_name = DB::table('printers')->where('id', $printer_id)->value('name');
+        return $printer_name;
+    }
+
+    public function searchRequests(){
+        $requests = PrintRequest::all();
+        $departments = Department::all();
+        return view('requests.search', compact('requests' , 'departments'));
+    }
+
+    public function refineSearch(Request $request){
+        
     }
 
     public static function getColoredStr($cor){
@@ -79,11 +101,11 @@ class RequestController extends Controller
             'description' => 'required|regex:/^[a-zA-Z0-9 ]*$/',
             'due_date' => 'nullable|date',
             'quantity' => 'required|numeric|between:1,1000',
-            'paper_size' => 'required|numeric|between:1,2',
-            'paper_type' => 'required|numeric|between:1,3',
-            'print_file' => 'required|file|mimes:jpeg,png,bmp,svg,odt,pdf,xls,xlt,xlsx,xlsm,doc,docx,docm',
+            'paper_size' => 'required|numeric|between:3,4',
+            'paper_type' => 'required|numeric|between:0,2',
+            'print_file' => 'required|file|mimes:jpg,jpeg,png,bmp,svg,odt,pdf,xls,xlt,xlsx,xlsm,doc,docx,docm',
             'printer_id' => 'required|numeric',
-            'colored' => 'required|numeric|between:1,2',
+            'colored' => 'required|numeric|between:0,1',
         ]);
         $file  = $request->file('print_file')->store('print_files');
         $pedido = new PrintRequest();
@@ -93,6 +115,6 @@ class RequestController extends Controller
         $pedido->file = $file;
         $pedido->save();
 
-        return redirect()->route('profile')->with('success', 'Request added successfully!!');
+        return redirect()->route('detail', $pedido->id)->with('success', 'Request added successfully!!');
     }
 }

@@ -10,7 +10,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create Request</div>
                     <div class="panel-body">
-                        {!! Form::open(array('route' => array('requests.store', $pedido->id), 'files'=>true)) !!}
+                        {!! Form::open(array('route' => array('requests.store'), 'files'=>true)) !!}
                             {{ csrf_field() }}
 
                             <div class="col-md-6" style="">

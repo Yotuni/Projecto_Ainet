@@ -29,4 +29,10 @@ Route::get('{id}/edit', 'UserController@edit')->name('edit');
 
 Route::put('{id}/edit', 'UserController@update')->name('update');
 
+Route::get('/details/{id}', 'RequestController@detail')->name('detail');
+
 Route::get('/listusers', 'UserController@index')->name('listusers');
+
+Route::get('/userRequests', 'RequestController@userRequests')->name('userRequests');
+
+Route::get('/searchRequests', 'RequestController@searchRequests')->name('searchRequests');
