@@ -8,6 +8,7 @@ use Illuminate\Http\File;
 use App\PrintRequest;
 use App\Printer;
 use Auth;
+use DB;
 
 class RequestController extends Controller
 {
@@ -16,21 +17,59 @@ class RequestController extends Controller
         return view('requests.index', compact('requests'));
     }
 
+    public function detail($request_id) {
+        $pedido = PrintRequest::findOrFail($request_id);
+        $owner_user = DB::table('users')->where('id', $pedido->owner_id)->first();
+        return view('requests.detail', compact('pedido', 'owner_user'));
+    }
+
+    public static function getColoredStr($cor){
+        switch($cor){
+            case 0 :
+                return "Monochromatic";
+            case 1 :
+                return "Colored";
+            default: return null;
+        }
+    }
+
+    public static function getSizeStr($tamanho){
+        switch($tamanho){
+            case 3 :
+                return "A3";
+            case 4 :
+                return "A4";
+            default: return null;
+        }
+    }
+
+    public static function getTypeStr($tipo){
+        switch($tipo){
+            case 0 :
+                return "Draft";
+            case 1 :
+                return "Normal";
+            case 2 :
+                return "Photograpic";
+            default: return null;
+        }
+    }
+
     public function create(Request $request) {
         $pedido = new PrintRequest();
         $printers = Printer::all();
-        $paper_sizes = [1 => 'A3', 2 => 'A4'];
-        $color_types = [1 => 'Monochromatic', 2 => 'Colored'];
-        $paper_types = [1 => 'Draft', 2 => 'Normal', 3 => 'Photograpic'];
+        $paper_sizes = [3 => 'A3', 4 => 'A4'];
+        $color_types = [0 => 'Monochromatic', 1 => 'Colored'];
+        $paper_types = [0 => 'Draft', 1 => 'Normal', 2 => 'Photograpic'];
         return view('requests.new', compact('pedido', 'printers', 'paper_sizes', 'color_types', 'paper_types'));
     }
 
     public function edit($request_id) {
         $pedido = PrintRequest::findOrFail($request_id);
         $printers = Printer::all();
-        $paper_sizes = [1 => 'A3', 2 => 'A4'];
-        $color_types = [1 => 'Monochromatic', 2 => 'Colored'];
-        $paper_types = [1 => 'Draft', 2 => 'Normal', 3 => 'Photograpic'];
+        $paper_sizes = [3 => 'A3', 4 => 'A4'];
+        $color_types = [0 => 'Monochromatic', 1 => 'Colored'];
+        $paper_types = [0 => 'Draft', 1 => 'Normal', 2 => 'Photograpic'];
         return view('requests.new', compact('pedido', 'printers', 'paper_sizes', 'color_types', 'paper_types'));
     }
 

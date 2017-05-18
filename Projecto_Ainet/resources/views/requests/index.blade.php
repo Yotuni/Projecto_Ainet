@@ -31,6 +31,7 @@
                 <div class="col-md-9">{{ $request->description }}</div>
                 <div class="col-md-2">
                     <!--<a class="btn btn-small btn-success" href="{{-- URL::to('printers/' . $value->id) --}}">Show</a>-->
+                    <a class="btn btn-small btn-success" href="{{ Route('detail', $request->id) }}">Details</a>
                     <a class="btn btn-small btn-success" href="{{ URL::to('requests/' . $request->id . '/edit') }}">Edit</a>
                     <!--<a class="btn btn-small btn-danger" href="{{-- URL::to('printers/' . $value->id . '/remove') --}}">Remove</a>-->
                     {{ Form::open(array('url' => 'requests/' . $request->id, 'class' => 'pull-right')) }}
